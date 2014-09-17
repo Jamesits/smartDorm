@@ -1,6 +1,6 @@
 #include <Wire.h>
  
-#define SLAVE_ADDRESS 0x04
+#define SLAVE_ADDRESS 0x05
 int number = 0;
 int state = 0;
  
@@ -52,6 +52,7 @@ void sendData(){
 // Get the internal temperature of the arduino
 double GetTemp(void)
 {
+  /*
  unsigned int wADC;
  double t;
  ADMUX = (_BV(REFS1) | _BV(REFS0) | _BV(MUX3));
@@ -62,4 +63,6 @@ double GetTemp(void)
  wADC = ADCW;
  t = (wADC - 324.31 ) / 1.22;
  return (t);
+ */
+ return 32;
 }
