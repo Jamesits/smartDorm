@@ -64,8 +64,8 @@ void setup() {
 }
  
 void loop() {
- delay(100);
- temp = GetTemp();
+ //delay(100);
+ //temp = GetTemp();
 }
  
 // callback for received data
@@ -74,7 +74,7 @@ void receiveData(int byteCount){
  while(Wire.available()) {
   number = Wire.read();
  
-  if (number == 1){
+  if (number == 255){
    if (state == 0){
     digitalWrite(13, HIGH); // set the LED on
     state = 1;
@@ -84,15 +84,22 @@ void receiveData(int byteCount){
    }
   }
  
-  if(number==2) {
-   number = (int)temp;
+  if(number != 255) {
+   //number = (int)temp;
+   setLedValue(number);
   }
  }
 }
  
 // callback for sending data
 void sendData(){
- Wire.write(number);
+  if (number == -1)
+  {
+     Wire.write(state);
+  }
+  else {
+    Wire.write(number);
+  }
 }
  
 // Get the internal temperature of the arduino
